@@ -356,16 +356,7 @@ The project includes visualization utilities:
 - ESRGAN: "ESRGAN: Enhanced Super-Resolution Generative Adversarial Networks" (Wang et al., 2018)
 - RCAN: Zhang, Y., Li, K., Li, K., Wang, L., Zhong, B., and Fu, Y., "Image Super-Resolution Using Very Deep Residual Channel Attention Networks", arXiv e-prints, Art. no. arXiv:1807.02758, 2018. doi:10.48550/arXiv.1807.02758.
 
-## License
+## Authors
 
-[Specify your license here]
-
-## Author
-
-Felix Floberg
-
-## Acknowledgments
-
-- DIV2K dataset creators
-- TensorFlow/Keras development team
+A. B. Bahi, Felix Floberg, Simon Que, 黎裴方東
 
