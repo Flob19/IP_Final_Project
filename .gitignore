@@ -43,10 +43,15 @@ models/
 *.ckpt
 *.pb
 
-# Data
+# Data directories
 data/
-*.jpg
+dataset/
+
+# Results and outputs
+results/
+outputs/
 *.png
+*.jpg
 *.jpeg
 *.npy
 *.npz

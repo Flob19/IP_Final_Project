@@ -45,17 +45,30 @@ The project requires the following packages (see `requirements.txt` for exact ve
 
 ```
 IP_Final_Project/
-├── README.md                 # This file
-├── requirements.txt          # Python dependencies
-├── config.py                 # Configuration and hyperparameters
-├── train.py                  # Main training script
+├── README.md                    # This file
+├── requirements.txt             # Python dependencies
+├── config.py                    # Configuration and hyperparameters
+├── train.py                     # Command-line training script
+├── evaluate.py                  # Command-line evaluation script
 ├── dip_final_project_srgan.py  # Original notebook code (reference)
-└── src/                      # Source code modules
+├── .gitignore                   # Git ignore file
+├── data/                        # Dataset directory (created by user)
+│   └── DIV2K/                  # DIV2K dataset
+├── models/                      # Trained models directory (auto-created)
+│   ├── srgan_generator_epoch_*.keras
+│   └── attentive_esrgan_epoch_*.keras
+├── results/                     # Evaluation results (optional)
+└── src/                         # Source code modules
     ├── __init__.py
-    ├── data.py               # Data loading and preprocessing
-    ├── models.py             # Model architectures
-    ├── training.py           # Training functions
-    └── utils.py             # Evaluation and visualization utilities
+    ├── data.py                  # Data loading and preprocessing
+    ├── training.py              # Training functions
+    ├── evaluation.py            # Evaluation functions (PSNR, SSIM)
+    ├── visualization.py         # Visualization functions
+    └── models/                  # Model modules
+        ├── __init__.py
+        ├── srcnn.py             # SRCNN model class
+        ├── srgan.py             # SRGAN Generator and Discriminator classes
+        └── attentive_esrgan.py  # Attentive ESRGAN Generator and Discriminator classes
 ```
 
 ## Quick Start
@@ -66,6 +79,8 @@ IP_Final_Project/
 git clone <repository-url>
 cd IP_Final_Project
 ```
+
+**Note**: Replace `<repository-url>` with your actual GitHub repository URL once created.
 
 ### 2. Install Dependencies
 
