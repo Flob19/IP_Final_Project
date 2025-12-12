@@ -76,11 +76,9 @@ IP_Final_Project/
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Flob19/IP_Final_Project.git
 cd IP_Final_Project
 ```
-
-**Note**: Replace `<repository-url>` with your actual GitHub repository URL once created.
 
 ### 2. Install Dependencies
 
