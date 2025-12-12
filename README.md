@@ -125,7 +125,7 @@ The project supports command-line training with flexible options:
 #### Train SRGAN Baseline
 
 ```bash
-# Basic training with default parameters
+# Basic training with default parameters (30 epochs)
 python train.py srgan
 
 # Custom epochs and steps per epoch
@@ -133,16 +133,22 @@ python train.py srgan --epochs 50 --steps-per-epoch 100
 
 # Save training plots to files
 python train.py srgan --save-plots
+
+# Quick test with 3 epochs
+python train.py srgan --epochs 3 --steps-per-epoch 10
 ```
 
 #### Train Attentive ESRGAN
 
 ```bash
-# Basic training
+# Basic training (30 epochs)
 python train.py attentive-esrgan
 
 # Custom training parameters
 python train.py attentive-esrgan --epochs 40 --steps-per-epoch 80 --save-plots
+
+# Quick test with 3 epochs
+python train.py attentive-esrgan --epochs 3 --steps-per-epoch 10
 ```
 
 #### Train SRCNN
@@ -152,6 +158,11 @@ python train.py srcnn
 ```
 
 **Note**: Trained models are automatically saved to `./models/` directory.
+
+**Optional**: For quick verification, you can use `test_training.py` to run both models with 3 epochs each:
+```bash
+python test_training.py
+```
 
 ### 5. Evaluation (Command-Line Interface)
 
