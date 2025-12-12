@@ -2,7 +2,7 @@
 
 A comprehensive implementation of Super-Resolution Generative Adversarial Networks (SRGAN) for image super-resolution, including baseline models and advanced variants.
 
-## 📋 Project Status
+## Project Status
 
 This repository contains the complete source code, documentation, and configuration files for the Super-Resolution GAN project. The code is organized into modular components and ready for GitHub deployment.
 
@@ -120,59 +120,100 @@ DIV2K/
         └── ...
 ```
 
-### 4. Training
+### 4. Training (Command-Line Interface)
 
-Run the main training script:
+The project supports command-line training with flexible options:
+
+#### Train SRGAN Baseline
 
 ```bash
-python train.py
+# Basic training with default parameters
+python train.py srgan
+
+# Custom epochs and steps per epoch
+python train.py srgan --epochs 50 --steps-per-epoch 100
+
+# Save training plots to files
+python train.py srgan --save-plots
 ```
 
-This will:
-- Check for DIV2K dataset (prompts for download if not found)
-- Train SRGAN baseline model
-- Train Attentive ESRGAN model
-- Generate training history plots
-- Compare models on test images (if available)
+#### Train Attentive ESRGAN
 
-### 5. Individual Model Training
+```bash
+# Basic training
+python train.py attentive-esrgan
 
-You can also import and use individual components:
+# Custom training parameters
+python train.py attentive-esrgan --epochs 40 --steps-per-epoch 80 --save-plots
+```
+
+#### Train SRCNN
+
+```bash
+python train.py srcnn
+```
+
+**Note**: Trained models are automatically saved to `./models/` directory.
+
+### 5. Evaluation (Command-Line Interface)
+
+Evaluate trained models on test images:
+
+#### Evaluate SRGAN Model
+
+```bash
+python evaluate.py srgan \
+    --model-path models/srgan_generator_epoch_30.keras \
+    --image path/to/test_image.jpg \
+    --output-dir results/
+```
+
+#### Evaluate Attentive ESRGAN Model
+
+```bash
+python evaluate.py attentive-esrgan \
+    --model-path models/attentive_esrgan_epoch_30.keras \
+    --image path/to/test_image.jpg \
+    --output-dir results/
+```
+
+#### Compare Two Models
+
+```bash
+python evaluate.py compare \
+    --model-a models/srgan_generator_epoch_30.keras \
+    --model-b models/attentive_esrgan_epoch_30.keras \
+    --image path/to/test_image.jpg \
+    --label-a "SRGAN Baseline" \
+    --label-b "Attentive ESRGAN" \
+    --output-dir results/
+```
+
+### 5. Programmatic Usage
+
+You can also import and use individual components programmatically:
 
 ```python
-from src.models import build_srgan_generator, build_srgan_discriminator
-from src.training import train_srgan_baseline
+from src.models.srgan import SRGANGenerator, SRGANDiscriminator
+from src.models.attentive_esrgan import AttentiveESRGANGenerator, RelativisticDiscriminator
+from src.training import train_srgan_baseline, train_attentive_esrgan
 from src.data import SRGANDataGenerator
+from src.evaluation import evaluate_gan_model
+from src.visualization import plot_gan_results
 
 # Build models
-generator = build_srgan_generator(scale=4, num_res_blocks=16)
-discriminator = build_srgan_discriminator(input_shape=(128, 128, 3))
+generator = SRGANGenerator(scale=4, num_res_blocks=16)
+discriminator = SRGANDiscriminator(input_shape=(128, 128, 3))
 
 # Prepare data
 train_gen = SRGANDataGenerator(train_dir, batch_size=16, crop_size=128, scale_factor=4)
 
 # Train
-history = train_srgan_baseline(generator, discriminator, ...)
-```
+history = train_srgan_baseline(generator.model, discriminator.model, ...)
 
-### 6. Evaluation
-
-Use the utility functions to evaluate models:
-
-```python
-from src.utils import predict_srgan_full_image, compare_two_gan_models
-
-# Evaluate single model
-predict_srgan_full_image(generator, "path/to/image.jpg", scale_factor=4)
-
-# Compare two models
-compare_two_gan_models(
-    gen_a=srgan_gen,
-    gen_b=attentive_gen,
-    label_a="SRGAN",
-    label_b="Attentive ESRGAN",
-    image_path="path/to/image.jpg"
-)
+# Evaluate
+results = evaluate_gan_model(generator.model, "path/to/image.jpg")
+plot_gan_results(results, model_name="SRGAN")
 ```
 
 ## Hyperparameters
